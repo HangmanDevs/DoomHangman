@@ -3,4 +3,5 @@
 *.pk3
 *.zip
 *.swp
+*.err
 backup/*
