@@ -10,6 +10,7 @@ global int 32:HangmanWords[];
 global int 33:HangmanPickedChars[];
 global int 34:HangmanGuessesLeft[];
 global int 35:KnownLetters[];
+global int 36:WordLengths[];
 
 int IsServer = -1;
 

@@ -24,5 +24,7 @@ Slime: HM09, and detailing the maps
 
 ## Notes
 
-The KnownLetters global array stores all letters known to the client. A value of -1 in it means that the letter is unknown, and a value of -2 signifies the end of the word.
+The KnownLetters global array stores all letters known to the client. A value of -1 in it means that the letter is unknown, and a value of -2 signifies the end of the word. A value of -11 means "make unknown if no value there", and -12 means "make end if no value there". When adjusted to be the proper charcter value, they become -2, -3, -12, and -13.
 This is for clients, so that even spectators can see the current word in play.
+
+The chr argument for HANGMAN\_REVEALLETTER needs to be one lower than the character itself. This is because elements in a global array are 0 by default, and we don't want to eliminate the null byte as a valid character. Not that it'll ever be used, but it's nice to know it's there.

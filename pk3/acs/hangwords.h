@@ -6,11 +6,11 @@
 
 int HangmanWordLists[SKILLCOUNT][WORDCOUNT] = 
 {
-    {"test", "harp", "norp", "birp", "durp"},
-    {"test", "harp", "norp", "birp", "durp"},
-    {"test", "harp", "norp", "birp", "durp"},
-    {"test", "harp", "norp", "birp", "durp"},
-    {"test", "harp", "norp", "birp", "durp"},
+    {"test of faith", "harp derp", "norp what", "ijon tichy", "this mod sucks"},
+    {"test of faith", "harp derp", "norp what", "ijon tichy", "this mod sucks"},
+    {"test of faith", "harp derp", "norp what", "ijon tichy", "this mod sucks"},
+    {"test of faith", "harp derp", "norp what", "ijon tichy", "this mod sucks"},
+    {"test of faith", "harp derp", "norp what", "ijon tichy", "this mod sucks"},
 };
 
 int HangmanSuperWords[SUPERWORDCOUNT] = 

@@ -22,20 +22,37 @@ script HANGMAN_WORDOPEN open
     Print(s:"done.");
 
     ACS_ExecuteWithResult(HANGMAN_CHOOSEWORD);
+
+    
 }
 
 script HANGMAN_CHOOSEWORD (void)
 {
     int skill = GameSkill();
     int choice = HangmanWordLists[skill][random(0, WORDCOUNT-1)];
-    int i;
+    int i, j;
+    int count, ocount;
 
     for (i = 0; i < TEAMCOUNT; i++)
     {
-        clearPickedChars(i);
         setHangmanWord(i, choice);
     }
     setRNGSeed();
+
+    while (1)
+    {
+        ocount = count;
+        count = PlayerCount();
+
+        if (count > ocount || j % 70 == 0)
+        {
+            for (i = 0; i < TEAMCOUNT; i++) { syncWord(i); }
+            j = 0;
+        }
+
+        j++;
+        Delay(1);
+    }
 }
 
 script 777 (void)

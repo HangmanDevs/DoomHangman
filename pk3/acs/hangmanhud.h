@@ -1,7 +1,7 @@
 script HANGMAN_HUD open clientside
 {
-    int pln = PlayerNumber();
-    int team, i;
+    int pln = ConsolePlayerNumber();
+    int team, i, wordoffset, k, wordlen, chr;
     SetHudSize(640, 480, 1);
 
     if (isCoop())
@@ -30,13 +30,14 @@ script HANGMAN_HUD open clientside
     
     while (1)
     {
-        team = GetPlayerInfo(-1, PLAYERINFO_TEAM);
+        team = GetPlayerInfo(pln, PLAYERINFO_TEAM);
+        wordlen = hangmanWordLen(team);
         SetHudSize(640, 480, 1);
 
         if (isCoop())
         {
             SetFont("BIGFONT");
-            HudMessage(d:HangmanGuessesLeft[4]; HUDMSG_PLAIN, 4831, CR_WHITE,
+            HudMessage(d:HangmanGuessesLeft[team]; HUDMSG_PLAIN, 4831, CR_WHITE,
                         84.4, 136.0, 0);
         }
         else if (isTeamgame())
@@ -49,6 +50,23 @@ script HANGMAN_HUD open clientside
             }
         }
 
+        wordoffset = 68.0 - (wordlen * 8.0);
+        for (i = 0; i < wordlen; i++)
+        {
+            chr = KnownLetters[i]-1;
+            SetFont("BIGFONT");
+
+            if (chr == -2)
+            {
+                HudMessage(s:"_"; HUDMSG_PLAIN, 3800+i, TeamColors[team], wordoffset + (16.0 * i), 100.2, 0);
+            }
+            else
+            {
+                HudMessage(c:chr; HUDMSG_PLAIN, 3800+i, TeamColors[team], wordoffset + (16.0 * i), 100.2, 0);
+            }
+        }
+
+        if (Timer()%35 == 0) { Log(d:team, s:"'s word len is ", d:wordlen); }
         Delay(1);
     }
 }

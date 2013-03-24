@@ -8,16 +8,40 @@ function int setHangmanWord(int team, int word)
     newWord = addString(word);
     HangmanWords[team] = newWord;
     setGuessesLeft(team, GetCVar("hangman_guesses"));
+    clearPickedChars(team);
 
     for (i = 0; i < len; i++)
     {
         j = GetChar(word, i);
-        if (j == 32) { ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, i, j, -1); }
-        else { ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, i, -2, -1); }
+        if (j == 32) { ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, i, j, team); }
+        else { ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, i, -2, team); }
     }
     ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, len, -3);
+    WordLengths[team] = len;
 
     return newWord;
+}
+
+function void syncWord(int team)
+{
+    int i, j;
+    int len = hangmanWordLen(team);
+
+    for (i = 0; i < len; i++)
+    {
+        j = getHangmanChar(team, i);
+
+        if (j == 32 || charPicked(team, j))
+        {
+            ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, i, j, team);
+        }
+        else
+        {
+            ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, i, -12, team);
+        }
+    }
+    ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, len, -13, team);
+    ACS_ExecuteAlways(HANGMAN_SETGUESSES, 0, team, HangmanGuessesLeft[team]);
 }
 
 function void setGuessesLeft(int team, int guessCount)
@@ -29,13 +53,29 @@ function void setGuessesLeft(int team, int guessCount)
 script HANGMAN_REVEALLETTER (int pos, int chr, int team) clientside
 {
     int cpln = ConsolePlayerNumber();
+    chr++;
 
     if (!isCoop() && IsServer != 1)
     {
-        if (PlayerIsSpectator(cpln) && team != -1 && chr >= -1) { terminate; }
+        if (PlayerIsSpectator(cpln) && team != -1 && chr >= 0) { terminate; }
         if (team != GetPlayerInfo(cpln, PLAYERINFO_TEAM)) { terminate; }
     }
-    KnownLetters[pos] = chr+1;
+
+    //Log(s:"chr for ", d:team, s:" is ", d:chr);
+
+    if (chr == -11 || chr == -12)
+    {
+        if (KnownLetters[pos] <= 0)
+        {
+            if (chr == -12 && IsServer != 1) { WordLengths[team] = pos; }
+            KnownLetters[pos] = chr+10;
+        }
+    }
+    else
+    {
+        if (chr == -2 && IsServer != 1) { WordLengths[team] = pos; }
+        KnownLetters[pos] = chr;
+    }
 }
 
 script HANGMAN_SETGUESSES (int team, int guesses) clientside
@@ -107,4 +147,9 @@ function int guess(int team, int pick)
     int ret = charInWord(team, pick);
     if (!ret) { HangmanGuessesLeft[team]--; }
     return ret;
+}
+
+function int hangmanWordLen(int team)
+{
+    return WordLengths[team];
 }
