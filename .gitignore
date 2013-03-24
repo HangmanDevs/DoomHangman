@@ -1,0 +1,6 @@
+*.bkp
+*.bak
+*.pk3
+*.zip
+*.swp
+backup/*

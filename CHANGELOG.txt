@@ -1,0 +1,10 @@
+v1 -> v2
+----------
++ Difficulties and another 500 words
++ HM09, by Slime
++ HM10, by Konda
++ HM11, by ijontichy
+* Merged scripts 3 and 5 in the team maps
+* Both special words no longer trigger the exit if you don't want them to
+* HM02 no longer delays between picking players, and does more damage.
+* You can no longer press the switches if a team wins
