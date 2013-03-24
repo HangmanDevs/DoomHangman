@@ -17,7 +17,7 @@ script HANGMAN_WORDOPEN open
     for (i = 0; i < seedVal; i++)
     {
         random(0, -1);
-        if (i % 5000 == 0) { Delay(1); }
+        if (i % 5000 == 4999) { Delay(1); }
     }
     Print(s:"done.");
 
@@ -53,24 +53,4 @@ script HANGMAN_CHOOSEWORD (void)
         j++;
         Delay(1);
     }
-}
-
-script 777 (void)
-{
-    int i;
-    for (i = 0; i < TEAMCOUNT; i++) { Print(s:getString(HangmanWords[i])); }
-
-    Print(d:getHangmanChar(0, 1), s:", ", c:getHangmanChar(0, 1));
-}
-
-script HANGMAN_PICK (int pick)
-{
-	int team = GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM);
-    PrintBold(s:"Team ", d:team, s:" picking char \'", c:pick, s:"\'");
-
-	if (!charPicked(team, pick))
-    {
-		if (guess(team, pick)) { ACS_ExecuteAlways(HANGMAN_PICK_SUCCESS, 0, team, pick); }
-		else { ACS_ExecuteAlways(HANGMAN_PICK_FAIL, 0, team, pick); }
-	}
 }

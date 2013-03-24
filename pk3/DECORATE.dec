@@ -1,0 +1,6 @@
+actor EndMenu: Inventory
+{
+    inventory.amount 1
+    inventory.maxamount 1
+    +UNDROPPABLE
+}

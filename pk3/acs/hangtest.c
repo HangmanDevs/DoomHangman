@@ -8,6 +8,7 @@
 #include "hangfuncs.h"
 
 #include "wordchoose.h"
+#include "pick.h"
 #include "hangmanhud.h"
 
 #library "hangtest"

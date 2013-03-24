@@ -42,6 +42,11 @@ function void syncWord(int team)
     }
     ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, len, -13, team);
     ACS_ExecuteAlways(HANGMAN_SETGUESSES, 0, team, HangmanGuessesLeft[team]);
+
+    for (i = 0; i < 256; i++)
+    {
+        if (charPicked(team, i)) { ACS_ExecuteAlways(HANGMAN_SETPICKED, 0, team, i, 1); }
+    }
 }
 
 function void setGuessesLeft(int team, int guessCount)
@@ -84,6 +89,12 @@ script HANGMAN_SETGUESSES (int team, int guesses) clientside
     HangmanGuessesLeft[team] = guesses;
 }
 
+script HANGMAN_SETPICKED (int team, int chr, int picked) clientside
+{
+    picked = !!picked;
+    HangmanPickedChars[(team*256)+chr] = picked;
+}
+
 function int setRNGSeed(void)
 {
     int i = random(0, 65535);
@@ -110,6 +121,7 @@ function void pickChar(int team, int pick, int onOff)
         return;
     }
     HangmanPickedChars[(team*256)+pick] = onOff;
+    ACS_ExecuteAlways(HANGMAN_SETPICKED, 0, team, pick, 1);
 }
 
 function int charPicked(int team, int pick)
@@ -153,11 +165,45 @@ function int guess(int team, int pick)
 {
     pickChar(team, pick, 1);
     int ret = charInWord(team, pick);
-    if (!ret) { HangmanGuessesLeft[team]--; }
+    int i, wordlen = hangmanWordLen(team);
+    if (!ret)
+    {
+        HangmanGuessesLeft[team]--;
+        ACS_ExecuteAlways(HANGMAN_SETGUESSES, 0, team, HangmanGuessesLeft[team]);
+    }
+    else
+    {
+        for (i = 0; i < wordlen; i++)
+        {
+            if (lower(getHangmanChar(team, i)) == lower(pick))
+            {
+                ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, i, pick, team);
+            }
+        }
+    }
     return ret;
 }
 
 function int hangmanWordLen(int team)
 {
     return WordLengths[team];
+}
+
+function void drawWord(int centerX, int centerY, int id, int duration)
+{
+    int team = GetPlayerInfo(ConsolePlayerNumber(), PLAYERINFO_TEAM);
+    int wordlen = hangmanWordLen(team);
+    int wordoffset = itof(centerX) - ((wordlen-1) * 8.0);
+    int chr, i;
+
+    centerY = itof(centerY) + 0.2;
+
+    for (i = 0; i < wordlen; i++)
+    {
+        chr = KnownLetters[i]-1;
+        SetFont("BIGFONT");
+
+        if (chr == -2) { HudMessage(s:"_"; HUDMSG_PLAIN, id+i, TeamColors[team], wordoffset + (16.0 * i), centerY, duration); }
+        else { HudMessage(c:chr; HUDMSG_PLAIN, id+i, TeamColors[team], wordoffset + (16.0 * i), centerY, duration); }
+    }
 }
