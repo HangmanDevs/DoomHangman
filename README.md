@@ -20,3 +20,9 @@ Konda: suggesting LOL I'M TYPING, helping with ACS, HM10, Decorate, and a truckl
 Slime: HM09, and detailing the maps
 
 ..and everyone else who helped test various times when I hosted :)
+
+
+## Notes
+
+The KnownLetters global array stores all letters known to the client. A value of -1 in it means that the letter is unknown, and a value of -2 signifies the end of the word.
+This is for clients, so that even spectators can see the current word in play.

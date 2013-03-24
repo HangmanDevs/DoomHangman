@@ -1,18 +1,15 @@
-#include "zcommon.acs"
-
-#include "commonFuncs.h"
-#include "stralloc.h"
-
-#include "hangdefs.h"
-#include "hangwords.h"
-#include "hangfuncs.h"
-
-#library "wordchoose"
-
 script HANGMAN_WORDOPEN open
 {
     int seedVal = abs(GetCVar("hangman_rngseed"));
     int i;
+
+    IsServer = 1;
+
+    if (GetCVar("hangman_guesses") == 0)
+    {
+        ConsoleCommand("set hangman_guesses 8");
+        ConsoleCommand("archivecvar hangman_guesses");
+    }
 
     for (i = 0; i < TEAMCOUNT; i++) { setHangmanWord(i, ""); }
 

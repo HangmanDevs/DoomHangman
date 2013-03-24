@@ -1,12 +1,47 @@
 function int setHangmanWord(int team, int word)
 {
     int newWord, prevWord = HangmanWords[team];
+    int i, j, len = StrLen(word);
 
     if (prevWord != 0) { freeString(prevWord); }
 
     newWord = addString(word);
     HangmanWords[team] = newWord;
+    setGuessesLeft(team, GetCVar("hangman_guesses"));
+
+    for (i = 0; i < len; i++)
+    {
+        j = GetChar(word, i);
+        if (j == 32) { ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, i, j, -1); }
+        else { ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, i, -2, -1); }
+    }
+    ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, len, -3);
+
     return newWord;
+}
+
+function void setGuessesLeft(int team, int guessCount)
+{
+    HangmanGuessesLeft[team] = guessCount;
+    ACS_ExecuteAlways(HANGMAN_SETGUESSES, 0, team, guessCount);
+}
+
+script HANGMAN_REVEALLETTER (int pos, int chr, int team) clientside
+{
+    int cpln = ConsolePlayerNumber();
+
+    if (!isCoop() && IsServer != 1)
+    {
+        if (PlayerIsSpectator(cpln) && team != -1 && chr >= -1) { terminate; }
+        if (team != GetPlayerInfo(cpln, PLAYERINFO_TEAM)) { terminate; }
+    }
+    KnownLetters[pos] = chr+1;
+}
+
+script HANGMAN_SETGUESSES (int team, int guesses) clientside
+{
+    if (IsServer == 1) { terminate; }
+    HangmanGuessesLeft[team] = guesses;
 }
 
 function int setRNGSeed(void)
@@ -52,4 +87,24 @@ function int getHangmanChar(int team, int index)
     if (index >= wordlen || index < 0) { return -1; }
 
     return strings[indexStart+index];
+}
+
+function int charInWord(int team, int pick)
+{
+    int ret, chr, i = 0;
+    while (1)
+    {
+        chr = getHangmanChar(team, i++);
+        if (chr == -1)   { break; }
+        if (chr == pick) { return 1; }
+    }
+    return 0;
+}
+
+function int guess(int team, int pick)
+{
+    pickChar(team, pick, 1);
+    int ret = charInWord(team, pick);
+    if (!ret) { HangmanGuessesLeft[team]--; }
+    return ret;
 }

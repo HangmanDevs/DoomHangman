@@ -527,7 +527,7 @@ function int isFreeForAll(void)
 
 function int isTeamGame(void)
 {
-    int ret = (GetCVar("teamplay") || GetCVar("teamgame"));
+    int ret = (GetCVar("teamplay") || GetCVar("teamgame") || GetCVar("teamlms"));
     return ret;
 }
 
