@@ -2,7 +2,7 @@
 // They come in handy :>
 
 #define PLAYERMAX 64
-#define TEAMCOUNT 4
+#define TEAMCOUNT 8
 #define DEFAULTTID_SCRIPT 471
 
 function int itof(int x) { return x << 16; }

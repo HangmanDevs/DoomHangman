@@ -31,7 +31,20 @@ script HANGMAN_CHOOSEWORD (void)
 {
     int skill = GameSkill();
     int choice = HangmanWordLists[skill][random(0, WORDCOUNT-1)];
+    int i;
 
-    Print(s:"The word is ", s:choice);
+    for (i = 0; i < TEAMCOUNT; i++)
+    {
+        clearPickedChars(i);
+        setHangmanWord(i, choice);
+    }
     setRNGSeed();
+}
+
+script 777 (void)
+{
+    int i;
+    for (i = 0; i < TEAMCOUNT; i++) { Print(s:getString(HangmanWords[i])); }
+
+    Print(d:getHangmanChar(0, 1), s:", ", c:getHangmanChar(0, 1));
 }
