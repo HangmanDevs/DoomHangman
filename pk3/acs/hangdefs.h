@@ -2,6 +2,9 @@
 #define HANGMAN_CHOOSEWORD      482
 #define HANGMAN_REVEALLETTER    483
 #define HANGMAN_SETGUESSES      484
+#define HANGMAN_PICK      485
+#define HANGMAN_PICK_SUCCESS      486
+#define HANGMAN_PICK_FAIL      487
 
 #define HANGMAN_HUD             584
 #define SETCOLORS 900
