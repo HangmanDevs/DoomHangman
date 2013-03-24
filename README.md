@@ -1,4 +1,4 @@
-# HANGMAN|
+# HANGMAN
 
 ## Maps
 HM01: Hangman!
