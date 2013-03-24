@@ -850,3 +850,15 @@ function int PlayerTeamCount(int teamNo)
     }
     return ret;
 }
+
+function int lower(int chr)
+{
+    if (chr > 64 && chr < 91) { return chr+32; }
+    return chr;
+}
+
+function int upper(int chr)
+{
+    if (chr > 90 && chr < 123) { return chr-32; }
+    return chr;
+}

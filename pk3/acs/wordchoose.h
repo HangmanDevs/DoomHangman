@@ -63,14 +63,14 @@ script 777 (void)
     Print(d:getHangmanChar(0, 1), s:", ", c:getHangmanChar(0, 1));
 }
 
-script HANGMAN_PICK (int pick) {
-	int team = GetPlayerInfo(PlayerNumber());
-	if(!charPicked(team, pick) {
-		if(guess(team, pick) {
-			ACS_ExecuteAlways(HANGMAN_PICK_SUCCESS, 0, team, pick);
-		}
-		else {
-			ACS_ExecuteAlways(HANGMAN_PICK_FAIL, 0, team, pick);
-		}
+script HANGMAN_PICK (int pick)
+{
+	int team = GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM);
+    PrintBold(s:"Team ", d:team, s:" picking char \'", c:pick, s:"\'");
+
+	if (!charPicked(team, pick))
+    {
+		if (guess(team, pick)) { ACS_ExecuteAlways(HANGMAN_PICK_SUCCESS, 0, team, pick); }
+		else { ACS_ExecuteAlways(HANGMAN_PICK_FAIL, 0, team, pick); }
 	}
 }

@@ -100,6 +100,10 @@ function void clearPickedChars(int team)
 function void pickChar(int team, int pick, int onOff)
 {
     onOff = !!onOff;
+    pick = lower(pick);
+
+    PrintBold(s:"Team ", d:team, s:" picking char \'", c:pick, s:"\'");
+
     if (pick < 0 || pick > 255)
     {
         Log(s:"** ERROR **\nTried to set char ", d:pick, s:" to ", d:onOff, s:" on team ", d:team, s:", which is invalid\n** ERROR **");
@@ -115,6 +119,7 @@ function int charPicked(int team, int pick)
         Log(s:"** ERROR **\nTried to get char ", d:pick, s:" on team ", d:team, s:", which is invalid\n** ERROR **");
         return -1;
     }
+    pick = lower(pick);
     return HangmanPickedChars[(team*256)+pick];
 }
 
@@ -132,9 +137,12 @@ function int getHangmanChar(int team, int index)
 function int charInWord(int team, int pick)
 {
     int ret, chr, i = 0;
+    pick = lower(pick);
+
     while (1)
     {
         chr = getHangmanChar(team, i++);
+        chr = lower(chr);
         if (chr == -1)   { break; }
         if (chr == pick) { return 1; }
     }
