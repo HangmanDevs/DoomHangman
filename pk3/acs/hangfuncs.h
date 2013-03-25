@@ -132,11 +132,15 @@ function void pickChar(int team, int pick, int onOff)
 
 function int charPicked(int team, int pick)
 {
+    if (pick == 32) { return 1; }
     if (pick < 0 || pick > 255)
     {
         Log(s:"** ERROR **\nTried to get char ", d:pick, s:" on team ", d:team, s:", which is invalid\n** ERROR **");
         return -1;
     }
+
+    if (!ValidCharacters[pick]) { return -1; }
+
     pick = lower(pick);
     return HangmanPickedChars[(team*256)+pick];
 }
@@ -157,6 +161,8 @@ function int charInWord(int team, int pick)
     int ret, chr, i = 0;
     pick = lower(pick);
 
+    if (!ValidCharacters[pick]) { return -1; }
+
     while (1)
     {
         chr = getHangmanChar(team, i++);
@@ -172,7 +178,13 @@ function int guess(int team, int pick)
     pickChar(team, pick, 1);
     int ret = charInWord(team, pick);
     int i, wordlen = hangmanWordLen(team);
-    if (!ret)
+
+    if (ret == -1)
+    {
+        return -1;
+    }
+
+    if (ret == 0)
     {
         HangmanGuessesLeft[team]--;
         ACS_ExecuteAlways(HANGMAN_SETGUESSES, 0, team, HangmanGuessesLeft[team]);
@@ -212,4 +224,29 @@ function void drawWord(int centerX, int centerY, int id, int duration)
         if (chr == -2) { HudMessage(s:"_"; HUDMSG_PLAIN, id+i, TeamColors[team], wordoffset + (16.0 * i), centerY, duration); }
         else { HudMessage(c:chr; HUDMSG_PLAIN, id+i, TeamColors[team], wordoffset + (16.0 * i), centerY, duration); }
     }
+}
+
+function int completedWord(int team)
+{
+    int len = hangmanWordLen(team);
+    int i, chr;
+
+    for (i = 0; i < len; i++)
+    {
+        chr = getHangmanChar(team, i);
+        if (!charPicked(team, chr)) { return 0; }
+    }
+
+    return 1;
+}
+
+function void win(int team)
+{
+    WinningTeam = team;
+    ACS_ExecuteAlways(HANGMAN_SETWINNER, 0, team);
+}
+
+script HANGMAN_SETWINNER (int team) clientside
+{
+    if (IsServer != 1) { WinningTeam = team; }
 }

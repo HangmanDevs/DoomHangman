@@ -31,22 +31,37 @@ script HANGMAN_HUD open clientside
     while (1)
     {
         team = getHangmanTeam(pln);
-
         SetHudSize(640, 480, 1);
 
         if (isCoop())
         {
             SetFont("BIGFONT");
-            HudMessage(d:HangmanGuessesLeft[team]; HUDMSG_PLAIN, 4831, CR_WHITE,
-                        HUD_CENTERX+24.4, HUD_CORNERY+32.0, 0);
+            if (WinningTeam == team)
+            {
+                HudMessage(s:"WIN"; HUDMSG_PLAIN, 4831, CR_WHITE,
+                            HUD_CENTERX+23.4, HUD_CORNERY+32.0, 0);
+            }
+            else
+            {
+                HudMessage(d:HangmanGuessesLeft[team]; HUDMSG_PLAIN, 4831, CR_WHITE,
+                            HUD_CENTERX+23.4, HUD_CORNERY+32.0, 0);
+            }
         }
         else if (isTeamgame())
         {
             for (i = 0; i < min(4, GetCVar("sv_maxteams")); i++)
             {
                 SetFont("BIGFONT");
-                HudMessage(d:HangmanGuessesLeft[i]; HUDMSG_PLAIN, 4831 + (10*i), TeamColors[i],
-                            HUD_CENTERX+24.4, HUD_CORNERY+32.0+(32.0*i), 0);
+                if (WinningTeam == i)
+                {
+                    HudMessage(s:"WIN"; HUDMSG_PLAIN, 4831 + (10*i), TeamColors[i],
+                                HUD_CENTERX+23.4, HUD_CORNERY+32.0+(32.0*i), 0);
+                }
+                else
+                {
+                    HudMessage(d:HangmanGuessesLeft[i]; HUDMSG_PLAIN, 4831 + (10*i), TeamColors[i],
+                                HUD_CENTERX+23.4, HUD_CORNERY+32.0+(32.0*i), 0);
+                }
             }
         }
 

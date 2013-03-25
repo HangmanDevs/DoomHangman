@@ -2,19 +2,52 @@ script HANGMAN_PICK (int pick) net
 {
     int pln = PlayerNumber();
     int team = getHangmanTeam(PlayerNumber());
+    int pickSuccess;
 
     if (!HangmanOn)
     {
         SetHudSize(640,480, 1);
         SetFont("BIGFONT");
-        HudMessage(s:"Wait for the game to start!"; HUDMSG_FADEOUT, 9100, CR_RED,
-                320.4, 160.2, 1.0, 0.5);
+
+        if (WinningTeam == -1)
+        {
+            HudMessage(s:"Wait for the game to start!"; HUDMSG_FADEOUT, 9100, CR_BRICK,
+                    320.4, 160.2, 1.0, 0.5);
+        }
+        else
+        {
+            HudMessage(s:"Team ", s:TeamColors2[WinningTeam], s:TeamNames[WinningTeam], s:"\c- has already won.";
+                HUDMSG_FADEOUT, 9100, CR_BRICK, 320.4, 160.2, 1.0, 0.5);
+        }
+        terminate;
     }
 
-    if (!charPicked(team, pick))
+    pickSuccess = charPicked(team, pick);
+    
+    if (pickSuccess == 0)
     {
-        if (guess(team, pick)) { ACS_ExecuteAlways(HANGMAN_PICK_SUCCESS, 0, team, pick); }
-        else { ACS_ExecuteAlways(HANGMAN_PICK_FAIL, 0, team, pick); }
+        if (guess(team, pick))
+        {
+            if (completedWord(team))
+            {
+                HangmanOn = 0;
+                win(team);
+                ACS_ExecuteAlways(HANGMAN_WIN, 0, team, pick);
+            }
+            else { ACS_ExecuteAlways(HANGMAN_PICK_SUCCESS, 0, team, pick); }
+        }
+        else
+        {
+            if (HangmanGuessesLeft[team] == 0) { ACS_ExecuteAlways(HANGMAN_LOSE, 0, team, pick); }
+            else { ACS_ExecuteAlways(HANGMAN_PICK_FAIL, 0, team, pick); }
+        }
+    }
+    else if (pickSuccess == -1)
+    {
+        SetHudSize(640,480, 1);
+        SetFont("BIGFONT");
+        HudMessage(s:"\cf", c:pick, s:"\c- is an invalid character!"; HUDMSG_FADEOUT, 9100, CR_RED,
+                320.4, 160.2, 1.0, 0.5);
     }
     else
     {
@@ -115,7 +148,7 @@ script HANGMAN_PICKMENU_CLIENT (void) clientside
             }
         }
 
-        if (HangmanGuessesLeft[team] <= 0)
+        if (HangmanGuessesLeft[team] <= 0 || WinningTeam != -1)
         {
             ConsoleCommand(StrParam(s:"puke -", d:HANGMAN_ENDMENU));
             break; 
