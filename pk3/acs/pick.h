@@ -1,8 +1,10 @@
-script HANGMAN_PICK (int pick) net
+script HANGMAN_PICK (int pick, int oldmode) net
 {
     int pln = PlayerNumber();
     int team = getHangmanTeam(PlayerNumber());
     int pickSuccess;
+
+    if (oldmode) { pick += 64; }
 
     if (!HangmanOn)
     {
