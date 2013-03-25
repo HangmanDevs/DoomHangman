@@ -15,10 +15,11 @@
 #define HANGMAN_REVEALLETTER    523
 #define HANGMAN_SETGUESSES      524
 #define HANGMAN_SETPICKED       525
-#define HANGMAN_SETWINNER       526
+#define HANGMAN_SETGAMESTATE    526
 
 #define SETCOLORS               900
 
+#define SKILLCOUNT  5
 
 #define HUD_CENTERX 80.0
 #define HUD_CORNERY 104.0
@@ -44,6 +45,8 @@ script SETCOLORS (int r, int g, int b) clientside
         if (s % 10000 == 9999) { Delay(1); }
     }
 }
+
+int SkillNames[SKILLCOUNT] = { "Illiteracy", "Basic", "Normal", "Educated", "Dictionary" };
 
 int TeamNames[TEAMCOUNT] = 
 {

@@ -12,6 +12,28 @@ script HANGMAN_WORDOPEN open
         ConsoleCommand("archivecvar hangman_guesses");
     }
 
+    if (!(GetCVar("survival") || (isLMS() && isTeamGame())))
+    {
+        SetHudSize(640, 480, 0);
+        SetFont("BIGFONT");
+        HudMessage(s:"Yo what the hell is going on."; HUDMSG_PLAIN, 901,
+            CR_BRICK, 320.4, 120.1, 5.0, 1.0);
+
+        if (isCoop())
+        {
+            ConsoleCommand("set survival 1");
+            HudMessage(s:"Switching to survival..."; HUDMSG_PLAIN, 902,
+                CR_YELLOW, 320.4, 140.1, 5.0, 1.0);
+        }
+        else
+        {
+            ConsoleCommand("set teamlms 1");
+            HudMessage(s:"Switching to TLMS..."; HUDMSG_PLAIN, 902,
+                CR_YELLOW, 320.4, 140.1, 5.0, 1.0);
+        }
+    }
+
+
     for (i = 0; i < TEAMCOUNT; i++) { setHangmanWord(i, ""); }
 
     Print(s:"Seeding RNG (", d:seedVal, s:")...");

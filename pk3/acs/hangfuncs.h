@@ -66,7 +66,7 @@ script HANGMAN_REVEALLETTER (int pos, int chr, int team) clientside
     int cpln = ConsolePlayerNumber();
     chr++;
 
-    if (!isCoop() && IsServer != 1)
+    if (!isCoop() && team != 4 && IsServer != 1)
     {
         if (PlayerIsSpectator(cpln) && team != -1 && chr >= 0) { terminate; }
         if (team != getHangmanTeam(cpln)) { terminate; }
@@ -116,6 +116,8 @@ function void clearPickedChars(int team)
 
 function void pickChar(int team, int pick, int onOff)
 {
+    int i, wordlen;
+
     onOff = !!onOff;
     pick = lower(pick);
 
@@ -128,6 +130,18 @@ function void pickChar(int team, int pick, int onOff)
     }
     HangmanPickedChars[(team*256)+pick] = onOff;
     ACS_ExecuteAlways(HANGMAN_SETPICKED, 0, team, pick, 1);
+
+    if (charInWord(team, pick))
+    {
+        wordlen = hangmanWordLen(team);
+        for (i = 0; i < wordlen; i++)
+        {
+            if (lower(getHangmanChar(team, i)) == lower(pick))
+            {
+                ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, i, pick, team);
+            }
+        }
+    }
 }
 
 function int charPicked(int team, int pick)
@@ -173,31 +187,22 @@ function int charInWord(int team, int pick)
     return 0;
 }
 
+function int revealAtPos(int team, int pos)
+{
+    int chr = getHangmanChar(team, pos);
+    pickChar(team, chr, 1);
+    return chr;
+}
+
 function int guess(int team, int pick)
 {
     pickChar(team, pick, 1);
     int ret = charInWord(team, pick);
-    int i, wordlen = hangmanWordLen(team);
-
-    if (ret == -1)
-    {
-        return -1;
-    }
 
     if (ret == 0)
     {
         HangmanGuessesLeft[team]--;
         ACS_ExecuteAlways(HANGMAN_SETGUESSES, 0, team, HangmanGuessesLeft[team]);
-    }
-    else
-    {
-        for (i = 0; i < wordlen; i++)
-        {
-            if (lower(getHangmanChar(team, i)) == lower(pick))
-            {
-                ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, i, pick, team);
-            }
-        }
     }
     return ret;
 }
@@ -242,11 +247,31 @@ function int completedWord(int team)
 
 function void win(int team)
 {
+    int i, j, k, wordlen;
+
     WinningTeam = team;
-    ACS_ExecuteAlways(HANGMAN_SETWINNER, 0, team);
+    ACS_ExecuteAlways(HANGMAN_SETGAMESTATE, 0, 0, team);
+
+    if (winningTeam > -1)
+    {
+        if (isCoop())
+        {
+            wordlen = hangmanWordLen(4);
+            for (i = 0; i < wordlen; i++) { revealAtPos(4, i); }
+        }
+        else for (i = 0; i < TEAMCOUNT; i++)
+        {
+            wordlen = hangmanWordLen(i);
+            for (j = 0; j < wordlen; j++) { revealAtPos(i, j); }
+        }
+    }
 }
 
-script HANGMAN_SETWINNER (int team) clientside
+script HANGMAN_SETGAMESTATE (int onOff, int team) clientside
 {
-    if (IsServer != 1) { WinningTeam = team; }
+    if (IsServer != 1)
+    {
+        HangmanOn   = onOff;
+        WinningTeam = team;
+    }
 }

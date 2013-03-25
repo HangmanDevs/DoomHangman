@@ -1,7 +1,8 @@
 script HANGMAN_HUD open clientside
 {
     int pln = ConsolePlayerNumber();
-    int team, i, wordoffset, k, wordlen, chr;
+    int team, i, wordoffset, k, wordlen, chr, numTeams;
+
     SetHudSize(640, 480, 1);
 
     if (isCoop())
@@ -31,10 +32,13 @@ script HANGMAN_HUD open clientside
     while (1)
     {
         team = getHangmanTeam(pln);
+        numTeams = min(4, GetCVar("sv_maxteams"));
         SetHudSize(640, 480, 1);
 
         if (isCoop())
         {
+            numTeams = 1;
+
             SetFont("BIGFONT");
             if (WinningTeam == team)
             {
@@ -49,21 +53,27 @@ script HANGMAN_HUD open clientside
         }
         else if (isTeamgame())
         {
-            for (i = 0; i < min(4, GetCVar("sv_maxteams")); i++)
+            for (i = 0; i < numTeams; i++)
             {
                 SetFont("BIGFONT");
                 if (WinningTeam == i)
                 {
                     HudMessage(s:"WIN"; HUDMSG_PLAIN, 4831 + (10*i), TeamColors[i],
-                                HUD_CENTERX+23.4, HUD_CORNERY+32.0+(32.0*i), 0);
+                                HUD_CENTERX+23.4, HUD_CORNERY+(32.0*(i+1)), 0);
                 }
                 else
                 {
                     HudMessage(d:HangmanGuessesLeft[i]; HUDMSG_PLAIN, 4831 + (10*i), TeamColors[i],
-                                HUD_CENTERX+23.4, HUD_CORNERY+32.0+(32.0*i), 0);
+                                HUD_CENTERX+23.4, HUD_CORNERY+(32.0*(i+1)), 0);
                 }
             }
         }
+
+        SetFont("BIGFONT");
+        HudMessage(s:"SKILL"; HUDMSG_PLAIN, 6900, CR_PURPLE,
+                    HUD_CENTERX + 0.4, HUD_CORNERY + 8.0 + (32.0 * (numTeams+1)), 0);
+        HudMessage(s:SkillNames[GameSkill()]; HUDMSG_PLAIN, 6901, CR_LIGHTBLUE,
+                    HUD_CENTERX + 0.4, HUD_CORNERY + 24.0 + (32.0 * (numTeams+1)), 0);
 
         if (!InPickMenu[pln]) { drawWord(ftoi(HUD_CENTERX), ftoi(HUD_CORNERY)-8, 3800, 0.25); }
 
