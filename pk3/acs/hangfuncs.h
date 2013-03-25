@@ -1,3 +1,9 @@
+function int getHangmanTeam(int pln)
+{
+    if (PlayerIsSpectator(pln) || isCoop()) { return 4; }
+    return GetPlayerInfo(pln, PLAYERINFO_TEAM);
+}
+
 function int setHangmanWord(int team, int word)
 {
     int newWord, prevWord = HangmanWords[team];
@@ -63,7 +69,7 @@ script HANGMAN_REVEALLETTER (int pos, int chr, int team) clientside
     if (!isCoop() && IsServer != 1)
     {
         if (PlayerIsSpectator(cpln) && team != -1 && chr >= 0) { terminate; }
-        if (team != GetPlayerInfo(cpln, PLAYERINFO_TEAM)) { terminate; }
+        if (team != getHangmanTeam(cpln)) { terminate; }
     }
 
     //Log(s:"chr for ", d:team, s:" is ", d:chr);
@@ -191,7 +197,7 @@ function int hangmanWordLen(int team)
 
 function void drawWord(int centerX, int centerY, int id, int duration)
 {
-    int team = GetPlayerInfo(ConsolePlayerNumber(), PLAYERINFO_TEAM);
+    int team = getHangmanTeam(ConsolePlayerNumber());
     int wordlen = hangmanWordLen(team);
     int wordoffset = itof(centerX) - ((wordlen-1) * 8.0);
     int chr, i;

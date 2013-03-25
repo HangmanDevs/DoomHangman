@@ -1,7 +1,15 @@
 script HANGMAN_PICK (int pick) net
 {
     int pln = PlayerNumber();
-    int team = GetPlayerInfo(PlayerNumber(), PLAYERINFO_TEAM);
+    int team = getHangmanTeam(PlayerNumber());
+
+    if (!HangmanOn)
+    {
+        SetHudSize(640,480, 1);
+        SetFont("BIGFONT");
+        HudMessage(s:"Wait for the game to start!"; HUDMSG_FADEOUT, 9100, CR_RED,
+                320.4, 160.2, 1.0, 0.5);
+    }
 
     if (!charPicked(team, pick))
     {
@@ -20,6 +28,14 @@ script HANGMAN_PICK (int pick) net
 script HANGMAN_PICKMENU (void)
 {
     int pln = PlayerNumber();
+
+    if (!HangmanOn)
+    {
+        SetHudSize(640,480, 1);
+        SetFont("BIGFONT");
+        HudMessage(s:"Wait for the game to start!"; HUDMSG_FADEOUT, 9100, CR_RED,
+                320.4, 160.2, 1.0, 0.5);
+    }
 
     if (InPickMenu[pln]) { terminate; }
     InPickMenu[pln] = 1;
@@ -50,7 +66,7 @@ script HANGMAN_PICKMENU_CLIENT (void) clientside
     int pln = PlayerNumber();
     if (pln != ConsolePlayerNumber()) { terminate; }
 
-    int team = GetPlayerInfo(pln, PLAYERINFO_TEAM);
+    int team = getHangmanTeam(pln);
 
     if (HangmanGuessesLeft[team] <= 0)
     {

@@ -30,8 +30,7 @@ script HANGMAN_HUD open clientside
     
     while (1)
     {
-        if (PlayerIsSpectator(pln) || isCoop()) { team = 4; }
-        else { team = GetPlayerInfo(pln, PLAYERINFO_TEAM); }
+        team = getHangmanTeam(pln);
 
         SetHudSize(640, 480, 1);
 
