@@ -30,16 +30,36 @@ script HANGMAN_PICK (int pick) net
         {
             if (completedWord(team))
             {
-                HangmanOn = 0;
-                win(team);
+                SetHudSize(480, 360, 1);
+                SetFont("BIGFONT");
+                HudMessageBold(s:TeamColors2[team], s:TeamNames[team], s:"\c- wins!";
+                    HUDMSG_FADEOUT, 401, CR_WHITE, 240.4, 90.1, 4.0, 1.0);
+
+                setGameState(0, team);
                 ACS_ExecuteAlways(HANGMAN_WIN, 0, team, pick);
             }
             else { ACS_ExecuteAlways(HANGMAN_PICK_SUCCESS, 0, team, pick); }
         }
         else
         {
-            if (HangmanGuessesLeft[team] == 0) { ACS_ExecuteAlways(HANGMAN_LOSE, 0, team, pick); }
-            else { ACS_ExecuteAlways(HANGMAN_PICK_FAIL, 0, team, pick); }
+            SetHudSize(640, 480, 1);
+            SetFont("BIGFONT");
+            HudMessage(s:"\cf\"", c:pick, s:"\"\c- is not in the word."; 
+                HUDMSG_FADEOUT, 400, CR_BRICK, 320.4, 150.1, 2.0, 1.0);
+
+            if (HangmanGuessesLeft[team] == 0)
+            {
+                SetHudSize(480, 360, 1);
+                SetFont("BIGFONT");
+                HudMessageBold(s:TeamColors2[team], s:TeamNames[team], s:"\c- loses.";
+                    HUDMSG_FADEOUT, 401, CR_WHITE, 240.4, 90.1, 4.0, 1.0);
+
+                ACS_ExecuteAlways(HANGMAN_LOSE, 0, team, pick);
+            }
+            else
+            {
+                ACS_ExecuteAlways(HANGMAN_PICK_FAIL, 0, team, pick);
+            }
         }
     }
     else if (pickSuccess == -1)
@@ -148,7 +168,7 @@ script HANGMAN_PICKMENU_CLIENT (void) clientside
             }
         }
 
-        if (HangmanGuessesLeft[team] <= 0 || WinningTeam != -1)
+        if (HangmanGuessesLeft[team] <= 0 || HangmanOn == 0)
         {
             ConsoleCommand(StrParam(s:"puke -", d:HANGMAN_ENDMENU));
             break; 

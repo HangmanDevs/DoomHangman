@@ -62,13 +62,19 @@ int TeamBoxes[TEAMCOUNT] =
 
 int TeamColors[TEAMCOUNT] = 
 {
-    CR_LIGHTBLUE, CR_BRICK, CR_GREEN, CR_GOLD,
+    CR_LIGHTBLUE, CR_RED, CR_GREEN, CR_GOLD,
     CR_WHITE, CR_WHITE, CR_WHITE, CR_WHITE,
+};
+
+int TeamLoseColors[TEAMCOUNT] = 
+{
+    CR_BLUE, CR_DARKRED, CR_DARKGREEN, CR_BROWN,
+    CR_DARKGREY, CR_DARKGREY, CR_DARKGREY, CR_DARKGREY,
 };
 
 int TeamColors2[TEAMCOUNT] = 
 {
-    "\cn", "\ca", "\cd", "\ck",
+    "\cn", "\cg", "\cd", "\ck",
     "\cj", "",    "",    "",
 };
 

@@ -4,7 +4,7 @@ script HANGMAN_WORDOPEN open
     int i;
 
     IsServer = 1;
-    HangmanOn = 0;  // should be 0 anyway, but still
+    setGameState(0, -1);
 
     if (GetCVar("hangman_guesses") == 0)
     {
@@ -61,7 +61,7 @@ script HANGMAN_CHOOSEWORD (void)
         setHangmanWord(i, choice);
     }
     setRNGSeed();
-    HangmanOn = 1;
+    setGameState(1, -1);
 
     while (1)
     {

@@ -2,6 +2,8 @@ script HANGMAN_HUD open clientside
 {
     int pln = ConsolePlayerNumber();
     int team, i, wordoffset, k, wordlen, chr, numTeams;
+    int wasSpect, spect;
+    int oldTeam;
 
     SetHudSize(640, 480, 1);
 
@@ -31,9 +33,20 @@ script HANGMAN_HUD open clientside
     
     while (1)
     {
+        oldTeam = team;
         team = getHangmanTeam(pln);
         numTeams = min(4, GetCVar("sv_maxteams"));
         SetHudSize(640, 480, 1);
+
+        wasSpect = spect;
+        spect = PlayerIsSpectator(pln);
+
+        if ((spect && !wasSpect) || (!spect && (team != oldTeam)))
+        {
+            Print(s:"oh shit clearing");
+            wordlen = hangmanWordLen(oldTeam);
+            for (i = 0; i < wordlen; i++) { KnownLetters[i] = -1; }
+        }
 
         if (isCoop())
         {
@@ -59,6 +72,11 @@ script HANGMAN_HUD open clientside
                 if (WinningTeam == i)
                 {
                     HudMessage(s:"WIN"; HUDMSG_PLAIN, 4831 + (10*i), TeamColors[i],
+                                HUD_CENTERX+23.4, HUD_CORNERY+(32.0*(i+1)), 0);
+                }
+                else if (HangmanGuessesLeft[i] <= 0)
+                {
+                    HudMessage(s:"XX"; HUDMSG_PLAIN, 4831 + (10*i), TeamLoseColors[i],
                                 HUD_CENTERX+23.4, HUD_CORNERY+(32.0*(i+1)), 0);
                 }
                 else

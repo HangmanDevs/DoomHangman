@@ -48,6 +48,7 @@ function void syncWord(int team)
     }
     ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, len, -13, team);
     ACS_ExecuteAlways(HANGMAN_SETGUESSES, 0, team, HangmanGuessesLeft[team]);
+    ACS_ExecuteAlways(HANGMAN_SETGAMESTATE, 0, HangmanOn, WinningTeam);
 
     for (i = 0; i < 256; i++)
     {
@@ -245,14 +246,13 @@ function int completedWord(int team)
     return 1;
 }
 
-function void win(int team)
+function void setWinner(int team)
 {
     int i, j, k, wordlen;
 
     WinningTeam = team;
-    ACS_ExecuteAlways(HANGMAN_SETGAMESTATE, 0, 0, team);
 
-    if (winningTeam > -1)
+    if (team > -1)
     {
         if (isCoop())
         {
@@ -265,6 +265,13 @@ function void win(int team)
             for (j = 0; j < wordlen; j++) { revealAtPos(i, j); }
         }
     }
+}
+
+function void setGameState(int onOff, int team)
+{
+    HangmanOn = onOff;
+    setWinner(team);
+    ACS_ExecuteAlways(HANGMAN_SETGAMESTATE, 0, onOff, team);
 }
 
 script HANGMAN_SETGAMESTATE (int onOff, int team) clientside
