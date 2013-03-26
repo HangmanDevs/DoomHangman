@@ -1,5 +1,3 @@
-cacodemon
-cyberdemon
 fascinating
 nailgun
 ranger
@@ -18,3 +16,5 @@ brazen
 simplicity
 brevity
 superconductivity
+bullshit
+smartass

@@ -1,4 +1,4 @@
-#define WORDCOUNT 23
+#define WORDCOUNT 44
 #define SUPERWORDCOUNT 3
 
 int HangmanWordLists[SKILLCOUNT][WORDCOUNT] = 
@@ -6,31 +6,46 @@ int HangmanWordLists[SKILLCOUNT][WORDCOUNT] =
     {
         "ant", "ball", "balloon", "cat", "play", "ant", "ball", "balloon",
         "cat", "play", "ant", "ball", "balloon", "cat", "play", "ant",
-        "ball", "balloon", "cat", "play", "ant", "ball", "balloon", 
+        "ball", "balloon", "cat", "play", "ant", "ball", "balloon", "cat",
+        "play", "ant", "ball", "balloon", "cat", "play", "ant", "ball",
+        "balloon", "cat", "play", "ant", "ball", "balloon", "cat", "play",
+        "ant", "ball", "balloon", "cat", 
     },
 
     {
         "america", "awesome", "cannon", "comical", "crazy", "insane", "king", "over",
         "porcupine", "powered", "skull", "tag", "tree", "america", "awesome", "cannon",
-        "comical", "crazy", "insane", "king", "over", "porcupine", "powered", 
+        "comical", "crazy", "insane", "king", "over", "porcupine", "powered", "skull",
+        "tag", "tree", "america", "awesome", "cannon", "comical", "crazy", "insane",
+        "king", "over", "porcupine", "powered", "skull", "tag", "tree", "america",
+        "awesome", "cannon", "comical", "crazy", 
     },
 
     {
-        "aghast", "brazen", "brevity", "cacodemon", "cistern", "crimson", "cyberdemon", "egyptian",
-        "excruciating", "fascinating", "granularity", "multitask", "muse", "nailgun", "obscure", "ranger",
-        "rhythm", "simplicity", "superconductivity", "surreal", "aghast", "brazen", "brevity", 
+        "aghast", "brazen", "brevity", "bullshit", "cacodemon", "cistern", "crimson", "cyberdemon",
+        "egyptian", "excruciating", "fascinating", "granularity", "multitask", "muse", "nailgun", "obscure",
+        "ranger", "rhythm", "simplicity", "smartass", "superconductivity", "surreal", "aghast", "brazen",
+        "brevity", "bullshit", "cacodemon", "cistern", "crimson", "cyberdemon", "egyptian", "excruciating",
+        "fascinating", "granularity", "multitask", "muse", "nailgun", "obscure", "ranger", "rhythm",
+        "simplicity", "smartass", "superconductivity", "surreal", 
     },
 
     {
-        "eloquence", "hierarchy", "histogram", "inscrutable", "layby", "lynx", "metamorphic", "modularity",
-        "pauldron", "spectrograph", "eloquence", "hierarchy", "histogram", "inscrutable", "layby", "lynx",
-        "metamorphic", "modularity", "pauldron", "spectrograph", "eloquence", "hierarchy", "histogram", 
+        "acerbic", "acrimony", "aphorism", "apocryphal", "capricious", "chicanery", "demagogue", "disengenious",
+        "eloquence", "equivocate", "etymology", "forbearance", "halcyon", "hierarchy", "histogram", "hyperbola",
+        "iconoclast", "inscrutable", "layby", "logomachy", "loquacious", "lynx", "metaclassing", "metamorphic",
+        "milieu", "modularity", "myopic", "obviate", "pauldron", "pecuniary", "proclivity", "puerile",
+        "pusillanimous", "renege", "reticent", "scintilla", "sojourn", "spectrograph", "syllogism", "tautological",
+        "terminus", "ubiquitous", "vilify", "vitiate", 
     },
 
     {
-        "ablutomania", "absquatulate", "anautarchia", "deuterium", "erinaceous", "fourier", "jentacular", "jobbernowl",
-        "kazatzka", "metaclassing", "pauciloquent", "philosophaster", "pyx", "qua", "tittynope", "tyromancy",
-        "varsovienne", "winklepicker", "wyn", "xylophilous", "yarborough", "zoanthropy", "zoppetto", 
+        "ablutomania", "absquatulate", "anautarchia", "baffona", "bradykinin", "dactylion", "deuterium", "eccedentesiast",
+        "erinaceous", "fabiform", "fourier", "gabelle", "hyoid", "jentacular", "jobbernowl", "kazatzka",
+        "knismesis", "lexiphanic", "necrotype", "orgulous", "pauciloquent", "philosophaster", "pyknic", "pyx",
+        "qua", "quipu", "quodlibet", "scacchic", "thob", "tittynope", "tyromancy", "varsovienne",
+        "winklepicker", "wyn", "xanthic", "xylophilous", "yarborough", "yclept", "yestreen", "zenzizenzizenzic",
+        "zoanthropy", "zoppetto", "ablutomania", "absquatulate", 
     },
 };
 
