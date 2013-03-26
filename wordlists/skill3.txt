@@ -8,3 +8,5 @@ layby
 hierarchy
 eloquence
 pauldron
+metaclassing
+hyperbola

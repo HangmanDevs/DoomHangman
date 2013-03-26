@@ -23,5 +23,4 @@ xylophilous
 zoanthropy
 zoppetto
 deuterium
-metaclassing
 fourier
