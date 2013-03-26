@@ -132,15 +132,12 @@ function void pickChar(int team, int pick, int onOff)
     HangmanPickedChars[(team*256)+pick] = onOff;
     ACS_ExecuteAlways(HANGMAN_SETPICKED, 0, team, pick, 1);
 
-    if (charInWord(team, pick))
+    wordlen = hangmanWordLen(team);
+    for (i = 0; i < wordlen; i++)
     {
-        wordlen = hangmanWordLen(team);
-        for (i = 0; i < wordlen; i++)
+        if (lower(getHangmanChar(team, i)) == lower(pick))
         {
-            if (lower(getHangmanChar(team, i)) == lower(pick))
-            {
-                ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, i, pick, team);
-            }
+            ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, i, pick, team);
         }
     }
 }
@@ -165,7 +162,7 @@ function int getHangmanChar(int team, int index)
     int indexStart = HangmanWords[team];
     if (indexStart == 0) { return -1; }
 
-    int wordlen = stringLength(indexStart);
+    int wordlen = WordLengths[team];
     if (index >= wordlen || index < 0) { return -1; }
 
     return strings[indexStart+index];
@@ -182,7 +179,7 @@ function int charInWord(int team, int pick)
     {
         chr = getHangmanChar(team, i++);
         chr = lower(chr);
-        if (chr == -1)   { break; }
+        if (chr <= -1)   { break; }
         if (chr == pick) { return 1; }
     }
     return 0;
@@ -191,8 +188,17 @@ function int charInWord(int team, int pick)
 function int revealAtPos(int team, int pos)
 {
     int chr = getHangmanChar(team, pos);
-    pickChar(team, chr, 1);
+
+    HangmanPickedChars[(team*256)+chr] = 1;
+    ACS_ExecuteAlways(HANGMAN_SETPICKED, 0, team, chr, 1);
+    ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, pos, chr, team);
     return chr;
+}
+
+function void revealWord(int team)
+{
+    int j, wordlen = hangmanWordLen(team);
+    for (j = 0; j < wordlen; j++) { revealAtPos(team, j); }
 }
 
 function int guess(int team, int pick)
@@ -249,21 +255,14 @@ function int completedWord(int team)
 function void setWinner(int team)
 {
     int i, j, k, wordlen;
+    int alertteams = min(GetCVar("sv_maxteams"), TEAMCOUNT);
 
     WinningTeam = team;
 
     if (team > -1)
     {
-        if (isCoop())
-        {
-            wordlen = hangmanWordLen(4);
-            for (i = 0; i < wordlen; i++) { revealAtPos(4, i); }
-        }
-        else for (i = 0; i < TEAMCOUNT; i++)
-        {
-            wordlen = hangmanWordLen(i);
-            for (j = 0; j < wordlen; j++) { revealAtPos(i, j); }
-        }
+        if (alertteams < 4) { revealWord(4); }
+        for (i = 0; i < alertteams; i++) { revealWord(i); }
     }
 }
 

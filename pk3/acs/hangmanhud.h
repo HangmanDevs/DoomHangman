@@ -43,7 +43,6 @@ script HANGMAN_HUD open clientside
 
         if ((spect && !wasSpect) || (!spect && (team != oldTeam)))
         {
-            Print(s:"oh shit clearing");
             wordlen = hangmanWordLen(oldTeam);
             for (i = 0; i < wordlen; i++) { KnownLetters[i] = -1; }
         }

@@ -4,3 +4,43 @@ actor EndMenu: Inventory
     inventory.maxamount 1
     +UNDROPPABLE
 }
+
+actor NoPull: CustomInventory
+{
+    States
+    {
+      Pickup:
+        TNT1 A 0 A_ChangeFlag("WINDTHRUST", 0)
+        stop
+    }
+}
+
+actor YesPull: CustomInventory
+{
+    States
+    {
+      Pickup:
+        TNT1 A 0 A_ChangeFlag("WINDTHRUST", 1)
+        stop
+    }
+}
+
+actor NoGodMode: CustomInventory
+{
+    States
+    {
+      Pickup:
+        TNT1 A 0 A_ChangeFlag("INVULNERABLE", 0)
+        stop
+    }
+}
+
+actor YesGodMode: CustomInventory
+{
+    States
+    {
+      Pickup:
+        TNT1 A 0 A_ChangeFlag("INVULNERABLE", 1)
+        stop
+    }
+}

@@ -1,7 +1,8 @@
+#define HANGMAN_PICK            135
+#define HANGMAN_PICKMENU        136
+
 #define HANGMAN_WORDOPEN        481
 #define HANGMAN_CHOOSEWORD      482
-#define HANGMAN_PICK            485
-#define HANGMAN_PICKMENU        486
 #define HANGMAN_ENDMENU         487
 
 #define HANGMAN_PICK_SUCCESS    491

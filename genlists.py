@@ -21,9 +21,16 @@ formatDict = {}
 for i, file in enumerate(wordFiles):
     file = WORDDIR + os.sep + file
     try:
-        words = [i.strip() for i in open(file).readlines()]
-        words = sorted(words)
+        words = [i for i in open(file).readlines()]
+        word2 = []
+
+        for word in words:
+            tmp = word.partition("//")[0].strip()
+            if tmp: word2.append(tmp)
+
+        words = sorted(word2)
         wordLists.append(words)
+
     except IOError:
         wordLists.append([])
 
@@ -32,7 +39,11 @@ wordcount = max(len(i) for i in wordLists)
 for words in wordLists:
     tmp = ["    {\n"]
 
-    words.extend(["filler"] * (wordcount - len(words)))
+    if len(words) == 0:
+        words.extend(["filler"] * (wordcount - len(words)))
+    else:
+        words *= 1 + (wordcount // len(words))
+        words = words[:wordcount]
 
     for i, word in enumerate(words):
         if (i % 8 == 0): tmp2 = "        \"{}\", "

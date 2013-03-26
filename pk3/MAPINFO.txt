@@ -1,0 +1,62 @@
+/*
+map HM01 "Hangman!"
+music d_runnin
+next HM01
+
+map HM02 "Hangman Survival!"
+music d_abode
+next HM03
+
+map HM03 "Drop"
+music d_countd
+next HM04
+
+map HM04 "Drop 2"
+sky1 rsky1 0.0
+music d_betwee
+next HM05
+
+map HM05 "Don't wake Cyber"
+music d_abode
+next HM06
+
+map HM06 "Rocket Square"
+sky1 rsky1 0.0
+music d_jep
+next HM02
+nocrouch
+
+map HM07 "Team Drop"
+sky1 stsky14 0.0
+music meh
+next HM08
+
+map HM08 "Firey Demise"
+sky1 stsky9 0.0
+music meh
+next HM09
+
+map HM09 "Sky Battle"
+sky1 stsky8 0.5
+music D_HM09
+next HM10
+
+map HM10 "Hell's Games"
+sky1 stsky8 0.5
+music d_orion
+next HM11
+*/
+
+// 4-way LMS maps
+
+map HM4LMS01 "Aphyxiation Man"
+music "D_FORGNE"
+sky1 "HMSKY1" 1
+forcenoskystretch
+
+
+
+clearepisodes
+episode HM01
+name "Hangman"
+key "h"

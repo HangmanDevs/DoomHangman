@@ -16,6 +16,10 @@ script HANGMAN_PICK (int pick, int oldmode) net
             HudMessage(s:"Wait for the game to start!"; HUDMSG_FADEOUT, 9100, CR_BRICK,
                     320.4, 160.2, 1.0, 0.5);
         }
+        else if (team == WinningTeam)
+        {
+            HudMessage(s:"You've already won!"; HUDMSG_FADEOUT, 9100, CR_BRICK, 320.4, 160.2, 1.0, 0.5);
+        }
         else
         {
             HudMessage(s:"Team ", s:TeamColors2[WinningTeam], s:TeamNames[WinningTeam], s:"\c- has already won.";
@@ -34,8 +38,17 @@ script HANGMAN_PICK (int pick, int oldmode) net
             {
                 SetHudSize(480, 360, 1);
                 SetFont("BIGFONT");
-                HudMessageBold(s:TeamColors2[team], s:TeamNames[team], s:"\c- wins!";
-                    HUDMSG_FADEOUT, 401, CR_WHITE, 240.4, 90.1, 4.0, 1.0);
+
+                if (team == 4)
+                {
+                    HudMessageBold(s:"You win!";
+                        HUDMSG_FADEOUT, 401, CR_GOLD, 240.4, 90.1, 4.0, 1.0);
+                }
+                else
+                {
+                    HudMessageBold(s:TeamColors2[team], s:TeamNames[team], s:"\c- wins!";
+                        HUDMSG_FADEOUT, 401, CR_GOLD, 240.4, 90.1, 4.0, 1.0);
+                }
 
                 setGameState(0, team);
                 ACS_ExecuteAlways(HANGMAN_WIN, 0, team, pick);
@@ -53,8 +66,17 @@ script HANGMAN_PICK (int pick, int oldmode) net
             {
                 SetHudSize(480, 360, 1);
                 SetFont("BIGFONT");
-                HudMessageBold(s:TeamColors2[team], s:TeamNames[team], s:"\c- loses.";
-                    HUDMSG_FADEOUT, 401, CR_WHITE, 240.4, 90.1, 4.0, 1.0);
+
+                if (team == 4)
+                {
+                    HudMessageBold(s:"You lose.";
+                        HUDMSG_FADEOUT, 401, CR_RED, 240.4, 90.1, 4.0, 1.0);
+                }
+                else
+                {
+                    HudMessageBold(s:TeamColors2[team], s:TeamNames[team], s:"\c- loses.";
+                        HUDMSG_FADEOUT, 401, CR_RED, 240.4, 90.1, 4.0, 1.0);
+                }
 
                 ACS_ExecuteAlways(HANGMAN_LOSE, 0, team, pick);
             }

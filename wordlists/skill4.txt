@@ -1,3 +1,7 @@
+// No wonder these words are so obscure
+// they sound outright silly
+// also word list comments booyah
+
 ablutomania
 absquatulate
 anautarchia
@@ -18,3 +22,6 @@ yarborough
 xylophilous
 zoanthropy
 zoppetto
+deuterium
+metaclassing
+fourier

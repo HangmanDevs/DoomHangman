@@ -1,0 +1,155 @@
+switch a
+on
+pic slash tics 8
+off
+pic a tics 8
+
+switch b
+on
+pic slash tics 8
+off
+pic b tics 8
+
+switch c
+on
+pic slash tics 8
+off
+pic c tics 8
+
+switch d
+on
+pic slash tics 8
+off
+pic d tics 8
+
+switch e
+on
+pic slash tics 8
+off
+pic e tics 8
+
+switch f
+on
+pic slash tics 8
+off
+pic f tics 8
+
+switch g
+on
+pic slash tics 8
+off
+pic g tics 8
+
+switch h
+on
+pic slash tics 8
+off
+pic h tics 8
+
+switch i
+on
+pic slash tics 8
+off
+pic i tics 8
+
+switch j
+on
+pic slash tics 8
+off
+pic j tics 8
+
+switch k
+on
+pic slash tics 8
+off
+pic k tics 8
+
+switch l
+on
+pic slash tics 8
+off
+pic l tics 8
+
+switch m
+on
+pic slash tics 8
+off
+pic m tics 8
+
+switch n
+on
+pic slash tics 8
+off
+pic n tics 8
+
+switch o
+on
+pic slash tics 8
+off
+pic o tics 8
+
+switch p
+on
+pic slash tics 8
+off
+pic p tics 8
+
+switch q
+on
+pic slash tics 8
+off
+pic q tics 8
+
+switch r
+on
+pic slash tics 8
+off
+pic r tics 8
+
+switch s
+on
+pic slash tics 8
+off
+pic s tics 8
+
+switch t
+on
+pic slash tics 8
+off
+pic t tics 8
+
+switch u
+on
+pic slash tics 8
+off
+pic u tics 8
+
+switch v
+on
+pic slash tics 8
+off
+pic v tics 8
+
+switch w
+on
+pic slash tics 8
+off
+pic w tics 8
+
+switch x
+on
+pic slash tics 8
+off
+pic x tics 8
+
+switch y
+on
+pic slash tics 8
+off
+pic y tics 8
+
+switch z
+on
+pic slash tics 8
+off
+pic z tics 8

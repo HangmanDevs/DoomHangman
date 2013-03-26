@@ -1,36 +1,36 @@
-#define WORDCOUNT 20
+#define WORDCOUNT 23
 #define SUPERWORDCOUNT 3
 
 int HangmanWordLists[SKILLCOUNT][WORDCOUNT] = 
 {
     {
-        "filler", "filler", "filler", "filler", "filler", "filler", "filler", "filler",
-        "filler", "filler", "filler", "filler", "filler", "filler", "filler", "filler",
-        "filler", "filler", "filler", "filler", 
+        "ant", "ball", "balloon", "cat", "play", "ant", "ball", "balloon",
+        "cat", "play", "ant", "ball", "balloon", "cat", "play", "ant",
+        "ball", "balloon", "cat", "play", "ant", "ball", "balloon", 
     },
 
     {
-        "filler", "filler", "filler", "filler", "filler", "filler", "filler", "filler",
-        "filler", "filler", "filler", "filler", "filler", "filler", "filler", "filler",
-        "filler", "filler", "filler", "filler", 
+        "america", "awesome", "cannon", "comical", "crazy", "insane", "king", "over",
+        "porcupine", "powered", "skull", "tag", "tree", "america", "awesome", "cannon",
+        "comical", "crazy", "insane", "king", "over", "porcupine", "powered", 
     },
 
     {
-        "filler", "filler", "filler", "filler", "filler", "filler", "filler", "filler",
-        "filler", "filler", "filler", "filler", "filler", "filler", "filler", "filler",
-        "filler", "filler", "filler", "filler", 
+        "aghast", "brazen", "brevity", "cacodemon", "cistern", "crimson", "cyberdemon", "egyptian",
+        "excruciating", "fascinating", "granularity", "multitask", "muse", "nailgun", "obscure", "ranger",
+        "rhythm", "simplicity", "superconductivity", "surreal", "aghast", "brazen", "brevity", 
     },
 
     {
-        "filler", "filler", "filler", "filler", "filler", "filler", "filler", "filler",
-        "filler", "filler", "filler", "filler", "filler", "filler", "filler", "filler",
-        "filler", "filler", "filler", "filler", 
+        "eloquence", "hierarchy", "histogram", "inscrutable", "layby", "lynx", "metamorphic", "modularity",
+        "pauldron", "spectrograph", "eloquence", "hierarchy", "histogram", "inscrutable", "layby", "lynx",
+        "metamorphic", "modularity", "pauldron", "spectrograph", "eloquence", "hierarchy", "histogram", 
     },
 
     {
-        "ablutomania", "absquatulate", "anautarchia", "erinaceous", "jentacular", "jobbernowl", "kazatzka", "pauciloquent",
-        "philosophaster", "pyx", "qua", "tittynope", "tyromancy", "varsovienne", "winklepicker", "wyn",
-        "xylophilous", "yarborough", "zoanthropy", "zoppetto", 
+        "ablutomania", "absquatulate", "anautarchia", "deuterium", "erinaceous", "fourier", "jentacular", "jobbernowl",
+        "kazatzka", "metaclassing", "pauciloquent", "philosophaster", "pyx", "qua", "tittynope", "tyromancy",
+        "varsovienne", "winklepicker", "wyn", "xylophilous", "yarborough", "zoanthropy", "zoppetto", 
     },
 };
 
