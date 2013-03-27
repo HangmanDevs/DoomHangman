@@ -2,7 +2,6 @@ acerbic
 acrimony
 aphorism
 apocryphal
-archaic
 capricious
 chicanery
 demagogue
@@ -48,3 +47,4 @@ vitiate
 euclidian
 nootropic
 phylactery
+schizoid  // this one might be a skill 2 thanks to King Crimson, iunno

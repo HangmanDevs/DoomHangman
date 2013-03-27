@@ -3,4 +3,22 @@ balloon
 play
 ball
 ant  // lol ant isn't a word
-
+below
+above
+nearby
+potato
+tomato
+heavy
+metal
+king
+skull
+tag   // oh har har
+awesome
+cannon
+bullshit
+smartass
+over
+power // har-dy fucking har
+doom  // dewm
+quack // quake
+wake
