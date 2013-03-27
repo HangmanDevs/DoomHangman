@@ -48,3 +48,4 @@ euclidian
 nootropic
 phylactery
 schizoid  // this one might be a skill 2 thanks to King Crimson, iunno
+deuterium
