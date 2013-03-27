@@ -32,9 +32,10 @@ global int 35:KnownLetters[];
 global int 36:WordLengths[];
 
 int InPickMenu[PLAYERMAX] = {0};
-int HangmanOn   = 0;
-int WinningTeam = -1;
-int IsServer    = -1;
+int HangmanOn           =  0;
+int HangmanNoGuesses    =  0;
+int WinningTeam         = -1;
+int IsServer            = -1;
 
 script SETCOLORS (int r, int g, int b) clientside
 {

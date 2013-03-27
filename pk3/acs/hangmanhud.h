@@ -47,42 +47,56 @@ script HANGMAN_HUD open clientside
             for (i = 0; i < wordlen; i++) { KnownLetters[i] = -1; }
         }
 
-        if (isCoop())
+        if (!HangmanNoGuesses)
         {
-            numTeams = 1;
+            if (isCoop())
+            {
+                numTeams = 1;
 
-            SetFont("BIGFONT");
-            if (WinningTeam == team)
-            {
-                HudMessage(s:"WIN"; HUDMSG_PLAIN, 4831, CR_WHITE,
-                            HUD_CENTERX+23.4, HUD_CORNERY+32.0, 0);
-            }
-            else
-            {
-                HudMessage(d:HangmanGuessesLeft[team]; HUDMSG_PLAIN, 4831, CR_WHITE,
-                            HUD_CENTERX+23.4, HUD_CORNERY+32.0, 0);
-            }
-        }
-        else if (isTeamgame())
-        {
-            for (i = 0; i < numTeams; i++)
-            {
                 SetFont("BIGFONT");
-                if (WinningTeam == i)
+                if (WinningTeam == team)
                 {
-                    HudMessage(s:"WIN"; HUDMSG_PLAIN, 4831 + (10*i), TeamColors[i],
-                                HUD_CENTERX+23.4, HUD_CORNERY+(32.0*(i+1)), 0);
-                }
-                else if (HangmanGuessesLeft[i] <= 0)
-                {
-                    HudMessage(s:"XX"; HUDMSG_PLAIN, 4831 + (10*i), TeamLoseColors[i],
-                                HUD_CENTERX+23.4, HUD_CORNERY+(32.0*(i+1)), 0);
+                    HudMessage(s:"WIN"; HUDMSG_PLAIN, 4831, CR_WHITE,
+                                HUD_CENTERX+23.4, HUD_CORNERY+32.0, 0);
                 }
                 else
                 {
-                    HudMessage(d:HangmanGuessesLeft[i]; HUDMSG_PLAIN, 4831 + (10*i), TeamColors[i],
-                                HUD_CENTERX+23.4, HUD_CORNERY+(32.0*(i+1)), 0);
+                    HudMessage(d:HangmanGuessesLeft[team]; HUDMSG_PLAIN, 4831, CR_WHITE,
+                                HUD_CENTERX+23.4, HUD_CORNERY+32.0, 0);
                 }
+            }
+            else if (isTeamgame())
+            {
+                for (i = 0; i < numTeams; i++)
+                {
+                    SetFont("BIGFONT");
+                    if (WinningTeam == i)
+                    {
+                        HudMessage(s:"WIN"; HUDMSG_PLAIN, 4831 + (10*i), TeamColors[i],
+                                    HUD_CENTERX+23.4, HUD_CORNERY+(32.0*(i+1)), 0);
+                    }
+                    else if (HangmanGuessesLeft[i] <= 0)
+                    {
+                        HudMessage(s:"XX"; HUDMSG_PLAIN, 4831 + (10*i), TeamLoseColors[i],
+                                    HUD_CENTERX+23.4, HUD_CORNERY+(32.0*(i+1)), 0);
+                    }
+                    else
+                    {
+                        HudMessage(d:HangmanGuessesLeft[i]; HUDMSG_PLAIN, 4831 + (10*i), TeamColors[i],
+                                    HUD_CENTERX+23.4, HUD_CORNERY+(32.0*(i+1)), 0);
+                    }
+                }
+            }
+        }
+        else
+        {
+            numTeams = 0;
+
+            HudMessage(s:" "; HUDMSG_PLAIN, 4829, CR_WHITE, 0, 0, 1);
+            for (i = 0; i < 8; i++)
+            {
+                HudMessage(s:" "; HUDMSG_PLAIN, 4831 + (10*i), CR_WHITE, 0, 0, 1);
+                HudMessage(s:" "; HUDMSG_PLAIN, 4839 + (10*i), CR_WHITE, 0, 0, 1);
             }
         }
 

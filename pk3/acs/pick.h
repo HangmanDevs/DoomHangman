@@ -64,7 +64,7 @@ script HANGMAN_PICK (int pick, int oldmode) net
             HudMessage(s:"\cf\"", c:pick, s:"\"\c- is not in the word."; 
                 HUDMSG_FADEOUT, 400, CR_BRICK, 320.4, 150.1, 2.0, 1.0);
 
-            if (HangmanGuessesLeft[team] == 0)
+            if (HangmanGuessesLeft[team] == 0 && !HangmanNoGuesses)
             {
                 SetHudSize(480, 360, 1);
                 SetFont("BIGFONT");

@@ -65,7 +65,6 @@ script HANGMAN_CHOOSEWORD (void)
         setHangmanWord(i, choice);
     }
     setRNGSeed();
-    setGameState(1, -1);
 
     while (1)
     {

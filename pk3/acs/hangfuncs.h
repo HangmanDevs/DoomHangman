@@ -25,6 +25,9 @@ function int setHangmanWord(int team, int word)
     ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, len, -3);
     WordLengths[team] = len;
 
+    if (ThingCountName("HangmanNoGuesses", 0) > 0) { setGameState2(1, -1, 1); }
+    else { setGameState2(1, -1, -1); }
+
     return newWord;
 }
 
@@ -122,7 +125,7 @@ function void pickChar(int team, int pick, int onOff)
     onOff = !!onOff;
     pick = lower(pick);
 
-    PrintBold(s:"Team ", d:team, s:" picking char \'", c:pick, s:"\'");
+    //PrintBold(s:"Team ", d:team, s:" picking char \'", c:pick, s:"\'");
 
     if (pick < 0 || pick > 255)
     {
@@ -206,7 +209,7 @@ function int guess(int team, int pick)
     pickChar(team, pick, 1);
     int ret = charInWord(team, pick);
 
-    if (ret == 0)
+    if (ret == 0 && !HangmanNoGuesses)
     {
         HangmanGuessesLeft[team]--;
         ACS_ExecuteAlways(HANGMAN_SETGUESSES, 0, team, HangmanGuessesLeft[team]);
@@ -268,16 +271,27 @@ function void setWinner(int team)
 
 function void setGameState(int onOff, int team)
 {
-    HangmanOn = onOff;
-    setWinner(team);
-    ACS_ExecuteAlways(HANGMAN_SETGAMESTATE, 0, onOff, team);
+    setGameState2(onOff, team, 0);
 }
 
-script HANGMAN_SETGAMESTATE (int onOff, int team) clientside
+function void setGameState2(int onOff, int team, int noGuesses)
+{
+    HangmanOn = onOff;
+    setWinner(team);
+    if (noGuesses == -1) { HangmanNoGuesses = 0; }
+    if (noGuesses ==  1) { HangmanNoGuesses = 1; }
+
+    ACS_ExecuteAlways(HANGMAN_SETGAMESTATE, 0, onOff, team, noGuesses);
+}
+
+script HANGMAN_SETGAMESTATE (int onOff, int team, int noGuesses) clientside
 {
     if (IsServer != 1)
     {
         HangmanOn   = onOff;
         WinningTeam = team;
+
+        if (noGuesses == -1) { HangmanNoGuesses = 0; }
+        if (noGuesses ==  1) { HangmanNoGuesses = 1; }
     }
 }

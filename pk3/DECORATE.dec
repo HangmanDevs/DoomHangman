@@ -5,6 +5,21 @@ actor EndMenu: Inventory
     +UNDROPPABLE
 }
 
+actor HangmanNoGuesses 17801
+{
+    Radius 0
+    Height 0
+
+    +NOINTERACTION
+
+    States
+    {
+      Spawn:
+        TNT1 A -1
+        stop
+    }
+}
+
 actor NoPull: CustomInventory
 {
     States
