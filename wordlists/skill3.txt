@@ -2,6 +2,7 @@ acerbic
 acrimony
 aphorism
 apocryphal
+archaic
 capricious
 chicanery
 demagogue
@@ -44,3 +45,6 @@ terminus
 ubiquitous
 vilify
 vitiate
+euclidian
+nootropic
+phylactery

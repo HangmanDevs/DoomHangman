@@ -11,3 +11,9 @@ america
 porcupine
 tree
 king
+doom  // dewm
+quack // quake
+diamond
+heavy
+metal
+chocolate

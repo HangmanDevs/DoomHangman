@@ -1,4 +1,4 @@
-#define WORDCOUNT 44
+#define WORDCOUNT 50
 #define SUPERWORDCOUNT 3
 
 int HangmanWordLists[SKILLCOUNT][WORDCOUNT] = 
@@ -9,34 +9,38 @@ int HangmanWordLists[SKILLCOUNT][WORDCOUNT] =
         "ball", "balloon", "cat", "play", "ant", "ball", "balloon", "cat",
         "play", "ant", "ball", "balloon", "cat", "play", "ant", "ball",
         "balloon", "cat", "play", "ant", "ball", "balloon", "cat", "play",
-        "ant", "ball", "balloon", "cat", 
+        "ant", "ball", "balloon", "cat", "play", "ant", "ball", "balloon",
+        "cat", "play", 
     },
 
     {
-        "america", "awesome", "cannon", "comical", "crazy", "insane", "king", "over",
-        "porcupine", "powered", "skull", "tag", "tree", "america", "awesome", "cannon",
-        "comical", "crazy", "insane", "king", "over", "porcupine", "powered", "skull",
-        "tag", "tree", "america", "awesome", "cannon", "comical", "crazy", "insane",
-        "king", "over", "porcupine", "powered", "skull", "tag", "tree", "america",
-        "awesome", "cannon", "comical", "crazy", 
+        "america", "awesome", "cannon", "chocolate", "comical", "crazy", "diamond", "doom",
+        "heavy", "insane", "king", "metal", "over", "porcupine", "powered", "quack",
+        "skull", "tag", "tree", "america", "awesome", "cannon", "chocolate", "comical",
+        "crazy", "diamond", "doom", "heavy", "insane", "king", "metal", "over",
+        "porcupine", "powered", "quack", "skull", "tag", "tree", "america", "awesome",
+        "cannon", "chocolate", "comical", "crazy", "diamond", "doom", "heavy", "insane",
+        "king", "metal", 
     },
 
     {
-        "aghast", "brazen", "brevity", "bullshit", "cacodemon", "cistern", "crimson", "cyberdemon",
-        "egyptian", "excruciating", "fascinating", "granularity", "multitask", "muse", "nailgun", "obscure",
-        "ranger", "rhythm", "simplicity", "smartass", "superconductivity", "surreal", "aghast", "brazen",
-        "brevity", "bullshit", "cacodemon", "cistern", "crimson", "cyberdemon", "egyptian", "excruciating",
-        "fascinating", "granularity", "multitask", "muse", "nailgun", "obscure", "ranger", "rhythm",
-        "simplicity", "smartass", "superconductivity", "surreal", 
+        "aghast", "brazen", "brevity", "bullshit", "cancer", "cistern", "crimson", "egyptian",
+        "excruciating", "exploit", "fascinating", "googol", "granularity", "lackluster", "lampoon", "multitask",
+        "muse", "nailgun", "obscure", "obsidian", "polearm", "quake", "ranger", "rhythm",
+        "simplicity", "smartass", "superconductivity", "surreal", "aghast", "brazen", "brevity", "bullshit",
+        "cancer", "cistern", "crimson", "egyptian", "excruciating", "exploit", "fascinating", "googol",
+        "granularity", "lackluster", "lampoon", "multitask", "muse", "nailgun", "obscure", "obsidian",
+        "polearm", "quake", 
     },
 
     {
-        "acerbic", "acrimony", "aphorism", "apocryphal", "capricious", "chicanery", "demagogue", "disengenious",
-        "eloquence", "equivocate", "etymology", "forbearance", "halcyon", "hierarchy", "histogram", "hyperbola",
-        "iconoclast", "inscrutable", "layby", "logomachy", "loquacious", "lynx", "metaclassing", "metamorphic",
-        "milieu", "modularity", "myopic", "obviate", "pauldron", "pecuniary", "proclivity", "puerile",
-        "pusillanimous", "renege", "reticent", "scintilla", "sojourn", "spectrograph", "syllogism", "tautological",
-        "terminus", "ubiquitous", "vilify", "vitiate", 
+        "acerbic", "acrimony", "aphorism", "apocryphal", "archaic", "capricious", "chicanery", "demagogue",
+        "disengenious", "efficacy", "eloquence", "equivocate", "etymology", "euclidian", "forbearance", "halcyon",
+        "hierarchy", "histogram", "hyperbola", "iconoclast", "inscrutable", "layby", "lexicon", "logomachy",
+        "loquacious", "lynx", "metaclassing", "metamorphic", "milieu", "modularity", "myopic", "nootropic",
+        "obviate", "pauldron", "pecuniary", "phylactery", "proclivity", "puerile", "pusillanimous", "renege",
+        "reticent", "scintilla", "sojourn", "spectrograph", "syllogism", "tautological", "terminus", "ubiquitous",
+        "vilify", "vitiate", 
     },
 
     {
@@ -45,7 +49,8 @@ int HangmanWordLists[SKILLCOUNT][WORDCOUNT] =
         "knismesis", "lexiphanic", "necrotype", "orgulous", "pauciloquent", "philosophaster", "pyknic", "pyx",
         "qua", "quipu", "quodlibet", "scacchic", "thob", "tittynope", "tyromancy", "varsovienne",
         "winklepicker", "wyn", "xanthic", "xylophilous", "yarborough", "yclept", "yestreen", "zenzizenzizenzic",
-        "zoanthropy", "zoppetto", "ablutomania", "absquatulate", 
+        "zoanthropy", "zoppetto", "ablutomania", "absquatulate", "anautarchia", "baffona", "bradykinin", "dactylion",
+        "deuterium", "eccedentesiast", 
     },
 };
 
