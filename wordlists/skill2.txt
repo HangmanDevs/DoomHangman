@@ -26,3 +26,5 @@ Poseidon
 gargoyle
 bolster
 bombastic
+subjective
+objective

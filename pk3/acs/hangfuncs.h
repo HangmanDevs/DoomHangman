@@ -13,8 +13,8 @@ function int setHangmanWord(int team, int word)
 
     newWord = addString(word);
     HangmanWords[team] = newWord;
-    setGuessesLeft(team, GetCVar("hangman_guesses"));
     clearPickedChars(team);
+    setGuessesLeft(team, GetCVar("hangman_guesses"));
 
     for (i = 0; i < len; i++)
     {
@@ -294,4 +294,34 @@ script HANGMAN_SETGAMESTATE (int onOff, int team, int noGuesses) clientside
         if (noGuesses == -1) { HangmanNoGuesses = 0; }
         if (noGuesses ==  1) { HangmanNoGuesses = 1; }
     }
+}
+
+function int oneTeamReveal(void)
+{
+    int alertteams = min(TEAMCOUNT, GetCVar("sv_maxteams"));
+    int i, j, someoneAlive = 0, teamField = 0, teamsLeft;
+
+    teamsLeft = 0;
+    for (i = 0; i < PLAYERMAX; i++)
+    {
+        if (!PlayerInGame(i)) { continue; }
+        if (GetActorProperty(PlayerTIDs[i], APROP_Health) <= 0) { continue; }
+        someoneAlive = 1;
+        j = GetPlayerInfo(i, PLAYERINFO_TEAM);
+
+        if (HangmanGuessesLeft[j] > 0)
+        {
+            if (!(teamField & (1 << j))) { teamsLeft++; }
+            teamField |= (1 << j);
+        }
+    }
+    
+    if (isCoop()) { if (!someoneAlive || HangmanGuessesLeft[4] <= 0) { revealWord(4); } }
+    else if (teamsLeft <= 1)
+    {
+        for (i = 0; i < alertteams; i++) { revealWord(i); }
+        return 1;
+    }
+
+    return 0;
 }

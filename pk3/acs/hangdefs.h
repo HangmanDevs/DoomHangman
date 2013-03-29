@@ -1,6 +1,12 @@
 #define HANGMAN_PICK            135
 #define HANGMAN_PICKMENU        136
 
+#define HANGMAN_ENTER           465
+#define HANGMAN_RESPAWN         466
+#define HANGMAN_SPAWN           467
+#define HANGMAN_DEATH           468
+#define HANGMAN_DISCONNECT      469
+
 #define HANGMAN_WORDOPEN        481
 #define HANGMAN_CHOOSEWORD      482
 #define HANGMAN_ENDMENU         487
@@ -32,6 +38,7 @@ global int 35:KnownLetters[];
 global int 36:WordLengths[];
 
 int InPickMenu[PLAYERMAX] = {0};
+int PlayerTIDS[PLAYERMAX] = {0};
 int HangmanOn           =  0;
 int HangmanNoGuesses    =  0;
 int WinningTeam         = -1;

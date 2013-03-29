@@ -81,3 +81,25 @@ script HANGMAN_CHOOSEWORD (void)
         Delay(1);
     }
 }
+
+
+script HANGMAN_ENTER   enter   { ACS_ExecuteWithResult(HANGMAN_SPAWN, 0); }
+script HANGMAN_RESPAWN respawn { ACS_ExecuteWithResult(HANGMAN_SPAWN, 1); }
+
+script HANGMAN_SPAWN (int respawning)
+{
+    int pln = PlayerNumber();
+    int pltid = defaultTID(-1);
+
+    PlayerTIDs[pln] = pltid;
+}
+
+script HANGMAN_DEATH death
+{
+    oneTeamReveal();
+}
+
+script HANGMAN_DISCONNECT (int pln) disconnect
+{
+    oneTeamReveal();
+}

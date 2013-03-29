@@ -3,8 +3,7 @@ script HANGMAN_PICK (int pick, int oldmode) net
     int pln = PlayerNumber();
     int team = getHangmanTeam(PlayerNumber());
     int pickSuccess;
-    int alertteams = min(TEAMCOUNT, GetCVar("sv_maxteams"));
-    int i, everyoneLost;
+    int i, j;
 
     if (oldmode) { pick += 64; }
 
@@ -80,18 +79,8 @@ script HANGMAN_PICK (int pick, int oldmode) net
                         HUDMSG_FADEOUT, 401, CR_RED, 240.4, 90.1, 4.0, 1.0);
                 }
 
-                everyoneLost = 1;
-                for (i = 0; i < alertteams; i++)
-                {
-                    if (HangmanGuessesLeft[i] > 0) { everyoneLost = 0; break; }
-                }
-                
-                if (isCoop()) { revealWord(4); }
-                else if (everyoneLost)
-                {
-                    for (i = 0; i < alertteams; i++) { revealWord(i); }
-                }
 
+                oneTeamReveal();
                 ACS_ExecuteAlways(HANGMAN_LOSE, 0, team, pick);
             }
             else
