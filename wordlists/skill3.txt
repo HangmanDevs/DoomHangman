@@ -16,7 +16,6 @@ hierarchy
 histogram
 hyperbola
 iconoclast
-inscrutable
 layby
 lexicon
 logomachy
@@ -49,3 +48,4 @@ nootropic
 phylactery
 schizoid  // this one might be a skill 2 thanks to King Crimson, iunno
 deuterium
+fourier

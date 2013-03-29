@@ -309,7 +309,7 @@ function int oneTeamReveal(void)
         someoneAlive = 1;
         j = GetPlayerInfo(i, PLAYERINFO_TEAM);
 
-        if (HangmanGuessesLeft[j] > 0)
+        if (HangmanGuessesLeft[j] > 0 || HangmanNoGuesses)
         {
             if (!(teamField & (1 << j))) { teamsLeft++; }
             teamField |= (1 << j);
