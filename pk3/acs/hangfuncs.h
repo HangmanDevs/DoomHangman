@@ -8,8 +8,9 @@ function int setHangmanWord(int team, int word)
 {
     int newWord, prevWord = HangmanWords[team];
     int i, j, len = StrLen(word);
+    int lastLen = -1;
 
-    if (prevWord != 0) { freeString(prevWord); }
+    if (prevWord != 0) { lastLen = WordLengths[team]; freeString(prevWord); }
 
     newWord = addString(word);
     HangmanWords[team] = newWord;
@@ -22,7 +23,8 @@ function int setHangmanWord(int team, int word)
         if (j == 32) { ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, i, j, team); }
         else { ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, i, -2, team); }
     }
-    ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, len, -3);
+
+    ACS_ExecuteAlways(HANGMAN_REVEALLETTER, 0, len, -3, team);
     WordLengths[team] = len;
 
     if (ThingCountName("HangmanNoGuesses", 0) > 0) { setGameState2(1, -1, 1); }
@@ -70,7 +72,9 @@ script HANGMAN_REVEALLETTER (int pos, int chr, int team) clientside
     int cpln = ConsolePlayerNumber();
     chr++;
 
-    if (!isCoop() && team != 4 && IsServer != 1)
+    if (team == 4) { team = getHangmanTeam(cpln); }
+
+    if (!isCoop() && IsServer != 1)
     {
         if (PlayerIsSpectator(cpln) && team != -1 && chr >= 0) { terminate; }
         if (team != getHangmanTeam(cpln)) { terminate; }
@@ -319,7 +323,13 @@ function int oneTeamReveal(void)
     if (isCoop()) { if (!someoneAlive || HangmanGuessesLeft[4] <= 0) { revealWord(4); } }
     else if (teamsLeft <= 1)
     {
-        for (i = 0; i < alertteams; i++) { revealWord(i); }
+        for (i = 0; i < alertteams; i++)
+        {
+            if (teamField & (1 << i)) { j = i; }
+            revealWord(i);
+        }
+
+        setGameState(0, j);
         return 1;
     }
 

@@ -28,6 +28,8 @@
 
 #define SKILLCOUNT  5
 
+#define UNIQUEWORDCOUNT 4
+
 #define HUD_CENTERX 80.0
 #define HUD_CORNERY 104.0
 

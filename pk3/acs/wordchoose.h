@@ -56,9 +56,11 @@ script HANGMAN_WORDOPEN open
 script HANGMAN_CHOOSEWORD (void)
 {
     int skill = GameSkill();
-    int choice = HangmanWordLists[skill][random(0, WORDCOUNT-1)];
+    int choice;
     int i, j;
     int count, ocount;
+
+    choice = HangmanWordLists[skill][random(0, WORDCOUNT-1)];
 
     for (i = 0; i < TEAMCOUNT; i++)
     {
