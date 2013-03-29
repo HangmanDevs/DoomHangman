@@ -106,7 +106,11 @@ script HANGMAN_HUD open clientside
         HudMessage(s:SkillNames[GameSkill()]; HUDMSG_PLAIN, 6901, CR_LIGHTBLUE,
                     HUD_CENTERX + 0.4, HUD_CORNERY + 24.0 + (32.0 * (numTeams+1)), 0);
 
-        if (!InPickMenu[pln]) { drawWord(ftoi(HUD_CENTERX), ftoi(HUD_CORNERY)-8, 3800, 0.25); }
+        if (!InPickMenu[pln])
+        {
+            SetHudSize(896, 672, 1);
+            drawWord(ftoi(FixedMul(HUD_CENTERX, 1.4)), ftoi(FixedMul(HUD_CORNERY, 1.4))-8, 3800, 0.25);
+        }
 
         Delay(1);
     }

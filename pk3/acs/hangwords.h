@@ -14,23 +14,23 @@ int HangmanWordLists[SKILLCOUNT][WORDCOUNT] =
     },
 
     {
-        "america", "average", "boon", "boundless", "cancer", "chocolate", "cistern", "comical",
-        "crazy", "diamond", "diversity", "egyptian", "exploit", "fascinating", "infinite", "insane",
-        "invisible", "maternity", "obscene", "obscure", "porcupine", "porpoise", "possible", "rhythm",
-        "ruse", "salvage", "selection", "synonym", "tasteless", "tree", "trustworthy", "unbelievable",
-        "america", "average", "boon", "boundless", "cancer", "chocolate", "cistern", "comical",
-        "crazy", "diamond", "diversity", "egyptian", "exploit", "fascinating", "infinite", "insane",
-        "invisible", "maternity", "obscene", 
+        "aerial", "america", "antonym", "aquatic", "average", "bombardment", "boon", "boundless",
+        "cancer", "chocolate", "cistern", "comical", "construction", "crazy", "destruction", "diamond",
+        "diversity", "egyptian", "exploit", "fascinating", "frontal", "infinite", "insane", "invisible",
+        "obscene", "obscure", "porcupine", "porpoise", "possible", "representation", "rhythm", "ruse",
+        "salvage", "selection", "synonym", "tasteless", "tree", "trustworthy", "unbelievable", "unholy",
+        "aerial", "america", "antonym", "aquatic", "average", "bombardment", "boon", "boundless",
+        "cancer", "chocolate", "cistern", 
     },
 
     {
-        "Poseidon", "aggregate", "aghast", "archaic", "bolster", "bombastic", "brazen", "brevity",
-        "conductive", "crimson", "dehumanization", "delineate", "delirium", "excruciating", "gargoyle", "googol",
-        "granularity", "incentive", "ineffable", "inscrutable", "intimacy", "lackluster", "lampoon", "multitask",
-        "muse", "nailgun", "objective", "obsidian", "polearm", "prevalence", "quake", "ranger",
-        "renaissance", "simplicity", "skirmish", "subjective", "surreal", "Poseidon", "aggregate", "aghast",
-        "archaic", "bolster", "bombastic", "brazen", "brevity", "conductive", "crimson", "dehumanization",
-        "delineate", "delirium", "excruciating", 
+        "Poseidon", "aggregate", "aghast", "annihilation", "aqueous", "archaic", "bolster", "bombastic",
+        "brazen", "brevity", "conductive", "crimson", "dehumanization", "delineate", "delirium", "excruciating",
+        "gargoyle", "googol", "granularity", "incentive", "ineffable", "inscrutable", "intimacy", "lackluster",
+        "lampoon", "maternity", "multitask", "muse", "nailgun", "objective", "obsidian", "paternity",
+        "polearm", "prevalence", "pulverization", "quake", "ranger", "renaissance", "simplicity", "skirmish",
+        "subjective", "surreal", "typeface", "Poseidon", "aggregate", "aghast", "annihilation", "aqueous",
+        "archaic", "bolster", "bombastic", 
     },
 
     {
