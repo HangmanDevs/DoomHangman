@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+import string
 import random
 
 wordFiles = {
@@ -9,7 +10,6 @@ wordFiles = {
     "2": "wordlists/skill2.txt",
     "3": "wordlists/skill3.txt",
     "4": "wordlists/skill4.txt",
-    "S": "wordlists/super.txt",
     "s": "wordlists/super.txt",
 }
 
@@ -35,14 +35,27 @@ try:
     while True:
         nextWord = random.choice(wordsToChooseL)
 
-        prompt = "\"{}\" [{}]: ".format(nextWord, "".join(sorted(wordFiles)))
-        choice = "invalid"
+        for char in nextWord:
+            if char not in string.ascii_letters:
+                continue
 
-        while choice not in wordFiles and choice:
-            choice = input(prompt)
 
-        if choice:
-            addWord(nextWord, wordFiles[choice])
+        while True:
+            choice = "invalid"
+            prompt = "\"{}\" [{}]: ".format(nextWord, "".join(sorted(wordFiles)) + "m")
+
+            while choice not in wordFiles and (choice and choice != "m"):
+                choice = input(prompt).lower()
+
+            if choice == "m":
+                nextWord = input("change to: ")
+                continue
+
+            if choice:
+                addWord(nextWord, wordFiles[choice])
+                print("added \"{}\" to \"{}\"".format(nextWord, wordFiles[choice]))
+
+            break
 
 except EOFError:
     pass
