@@ -54,9 +54,5 @@ music "D_FORGNE"
 sky1 "HMSKY1" 1
 forcenoskystretch
 
-
-
-clearepisodes
-episode HM01
-name "Hangman"
-key "h"
+map HMSURV01 "Hangman Survival!"
+music d_abode
